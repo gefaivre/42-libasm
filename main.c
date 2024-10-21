@@ -87,12 +87,17 @@ void test_read()
 	long r = 0;
 
 	printf("---------------------- READ ----------------------\n");
-
+	memset(buffer, 0, sizeof buffer);
 	READ(buffer, 50)
+	memset(buffer, 0, sizeof buffer);
 	READ(buffer, 25)
+	memset(buffer, 0, sizeof buffer);
 	READ(buffer, 4)
+	memset(buffer, 0, sizeof buffer);
 	READ(buffer, 26)
+	memset(buffer, 0, sizeof buffer);
 	READ(buffer, 14)
+	memset(buffer, 0, sizeof buffer);
 	READ(buffer, 0)
 }
 

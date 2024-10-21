@@ -17,9 +17,7 @@ ft_write:
 fail:
 	neg		rax				; changes rax to positive, the positive error num is needed
 	push	rax				; pushing rax to pile to preserve the error value
-    ; Use lea to load the address of __errno_location
-    lea     rdi, [rel __errno_location] ; Load address of __errno_location relative to RIP
-    call    rdi                ; call __errno_location
+	call	__errno_location ; Load address of __errno_location relative to RIP
 	pop		QWORD [rax]		; we pop the value stored earlier into the errno address (as a 64-bit qword)
 	mov		rax, -1			; we change rax to -1 so that ft_write returns it failed
 	ret						; returns rax

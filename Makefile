@@ -12,8 +12,8 @@ AS				= nasm
 ASFLAGS			= -f elf64 			# [-f] specify a format | [elf64] the format
 AR				= ar							
 ARFLAGS			= rcv							# try with or without s
-CC				= gcc
-CCFLAGS			= -Wall -Wextra -Werror -fPIE
+CC				= clang
+CCFLAGS			= -Wall -Wextra -Werror
 RM				= rm -rf
 
 NAME			= libasm.a
