@@ -12,7 +12,8 @@
 # define STRCPY(dest,src)		printf("str = %s | tes = %s\n", src, ft_strcpy(dest, src))
 # define STRCMP(s1,s2)			printf("s1[%s] | s2[%s], result = %i\n", s1, s2, ft_strcmp(s1, s2))
 # define WRITE(s, x)			printf("%s -> %ld\n", s, ft_write(STDOUT_FILENO, s, x));
-# define READ(b, x)			r = ft_read(STDIN_FILENO, buffer, x); printf("`%s`:%ld\n", buffer, r);
+# define READ(b, x)				r = ft_read(STDIN_FILENO, buffer, x); printf("`%s`:%ld\n", buffer, r); memset(buffer, 0, sizeof buffer);
+# define DUP(s)					tmp = ft_strdup(s); printf("[%s] = [%s]\n", tmp, s); free(tmp); tmp = NULL;
 
 void test_strlen()
 {
@@ -85,20 +86,29 @@ void test_read()
 {
 	char	buffer[100];
 	long r = 0;
+	memset(buffer, 0, sizeof buffer);
 
 	printf("---------------------- READ ----------------------\n");
-	memset(buffer, 0, sizeof buffer);
 	READ(buffer, 50)
-	memset(buffer, 0, sizeof buffer);
 	READ(buffer, 25)
-	memset(buffer, 0, sizeof buffer);
 	READ(buffer, 4)
-	memset(buffer, 0, sizeof buffer);
 	READ(buffer, 26)
-	memset(buffer, 0, sizeof buffer);
 	READ(buffer, 14)
-	memset(buffer, 0, sizeof buffer);
 	READ(buffer, 0)
+}
+
+void test_strdup()
+{
+	char	*tmp;
+
+	printf("---------------------- STRDUP ----------------------\n");
+	DUP("salut");
+	DUP("coucou");
+	DUP("\n");
+	DUP("ok");
+	DUP("dfsgdfdfdgfadsgdgghfdsag dsfh tdfh fhefh trs hrzehty ");
+	DUP("");
+	DUP("42");
 }
 
 
@@ -110,4 +120,5 @@ int main(void)
 	test_strcmp();
 	test_write();
 	test_read();
+	test_strdup();
 }
