@@ -1,14 +1,14 @@
+; int		ft_strlen(char const *str);
+; rdi -> char const *str
 section .text
-    global ft_strlen            ; Declare the strlen function to be accessible from other files
+    global ft_strlen            ; Declare the ft_strlen function global to be accessible from other files
 
 ft_strlen:
-    ; Input: RDI points to the string
-    mov rax, -1               ; Clear RAX (used as the length counter)
-
+    mov rax, -1                 ; Set counter (RAX) to -1 | int i = -1
 
 strlen_loop:
-    inc rax                     ; Increment the length counter
-    cmp byte [rdi + rax], 0             ; Check if the byte is the null terminator
-    jne strlen_loop             ; If it is, redo
+    inc rax                     ; Increment the counter
+    cmp byte [rdi + rax], 0     ; Check if the byte at [rdi + rax] is the null terminator (0 = ASCII value)
+    jne strlen_loop             ; If it's not equal, jump back to strlen_loop
 
-    ret                         ; Return from function, length is in RAX
+    ret

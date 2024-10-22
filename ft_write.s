@@ -1,23 +1,22 @@
-
-; 1st argument:	rdi -> in fd
-; 2nd argument:	rsi -> const void *buf
-; 3rd argument:	rdx -> size_t count
 ; ssize_t write(int fd, const void *buf, size_t count);
+; rdi -> int fd
+; rsi -> const void *buf
+; rdx -> size_t count
 section .text
-	global ft_write
-	extern __errno_location	; includes ___error but for linux
+    global ft_write
+    extern __errno_location      ; Use __errno_location (Linux) or __error (MacOS)
 
 ft_write:
-	mov		rax, 1			; rax = 1
-	syscall					; syscall(rax = calls index, also takes rdi and rsi as arguments)
-	test 	rax, rax		; bitwise "AND" operation, triggers the SF flag if it's signed (negative)
-	js		fail			; if SF = 1 -> rax is negative -> syscall returned an error
-	ret						; return
+    mov     rax, 1               ; Set RAX to 1, the syscall number for write
+    syscall                      ; Invoke the syscall with the number stored in RAX, result is stored in RAX too
+    test    rax, rax             ; Perform a bitwise "AND" on RAX; sets flags based on the result
+    js      fail                 ; If the sign flag (SF) is set, RAX is negative -> syscall error
+    ret                          ; Return if no error (RAX contains the number of bytes written)
 
 fail:
-	neg		rax				; changes rax to positive, the positive error num is needed
-	push	rax				; pushing rax to pile to preserve the error value
-	call	__errno_location ; Load address of __errno_location relative to RIP
-	pop		QWORD [rax]		; we pop the value stored earlier into the errno address (as a 64-bit qword)
-	mov		rax, -1			; we change rax to -1 so that ft_write returns it failed
-	ret						; returns rax
+    neg     rax                  ; RAX * -1 to make it positive (errno expects a positive value)
+    push    rax                  ; Push the negated value onto the stack to preserve it
+    call    __errno_location     ; Get the address of errno and load it into RAX
+    pop     QWORD [rax]          ; Pop the saved value into the location pointed to by RAX (errno)
+    mov     rax, -1              ; Set RAX to -1 to indicate the function call failed
+    ret
