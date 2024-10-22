@@ -35,7 +35,7 @@ There are three sections in assembly:
 | `.bss`        | To declare variables               |
 | `.text`       | To write the code                  |
 
-> I don't use variables or constants my libasm, so only the `.text` section is used.
+> I don't use variables or constants in my libasm, so only the `.text` section is used.
 
 ### Registers:
 Registers are small storage locations within the CPU.  
