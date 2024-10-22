@@ -1,3 +1,6 @@
+; char    *ft_strdup(const char *s);
+; rdi -> char *s
+
 section .text
     global  ft_strdup
     extern  malloc           ; Including malloc, ft_strlen, and ft_strcpy

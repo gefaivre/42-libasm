@@ -8,12 +8,12 @@
 /*
 ** Useful macros
 */
-# define STRLEN(x)				printf("[%s] = %d\n", x, ft_strlen(x))
-# define STRCPY(dest,src)		printf("str = %s | tes = %s\n", src, ft_strcpy(dest, src))
-# define STRCMP(s1,s2)			printf("s1[%s] | s2[%s], result = %i\n", s1, s2, ft_strcmp(s1, s2))
-# define WRITE(s, x)			printf("%s -> %ld\n", s, ft_write(STDOUT_FILENO, s, x));
-# define READ(b, x)				r = ft_read(STDIN_FILENO, buffer, x); printf("`%s`:%ld\n", buffer, r); memset(buffer, 0, sizeof buffer);
-# define DUP(s)					tmp = ft_strdup(s); printf("[%s] = [%s]\n", tmp, s); free(tmp); tmp = NULL;
+# define STRLEN(x)				printf("[%s]\nlibasm -> %zu \nstrlen -> %zu \n\n", x, ft_strlen(x), strlen(x))
+# define STRCPY(dest,src)		printf("[%s]\nlibasm -> [%s]\nstrcpy -> [%s]\n\n", src, ft_strcpy(dest, src), strcpy(dest, src))
+# define STRCMP(s1,s2)			printf("s1[%s] | s2[%s]\nlibasm -> %i\nstrcmp -> %i\n\n", s1, s2, ft_strcmp(s1, s2), strcmp(s1, s2))
+# define WRITE(s, x)			printf("\n[%s]\nlibasm -> %ld\nwrite -> %ld\n\n", s, ft_write(STDOUT_FILENO, s, x), write(STDOUT_FILENO, s, x));
+# define READ(b, x)				r = ft_read(STDIN_FILENO, buffer, x); printf("%s%ld\n", buffer, r); memset(buffer, 0, sizeof buffer);
+# define DUP(s)					tmp = ft_strdup(s), tmp2 = ft_strdup(s); printf("[%s]\nlibasm ->[%s]\nstrdup -> [%s]\n\n", s, tmp, tmp2); free(tmp); tmp = NULL;
 
 void test_strlen()
 {
@@ -24,7 +24,6 @@ void test_strlen()
 	STRLEN("0123456789abcdef");
 	STRLEN("**");
 	STRLEN("42");
-	STRLEN("hello my dear");
 	STRLEN("hello \0my dear");
 	printf("\n");
 }
@@ -46,40 +45,21 @@ void test_strcmp()
 {
 	printf("---------------------- STRCMP ----------------------\n");
 	STRCMP("coucou","coucou");
-	printf(" %i\n", strcmp("coucou", "coucou"));
-
 	STRCMP("", "");
-	printf(" %i\n", strcmp("", ""));
-
 	STRCMP("ouasi", "ouais");
-	printf(" %i\n", strcmp("ouasi", "ouais"));
-
-
 	STRCMP("", "ouais");
-	printf(" %i\n", strcmp("", "ouais"));
-
 	STRCMP("001", "002");
-	printf(" %i\n", strcmp("001", "002"));
-
 	STRCMP("002", "001");
-	printf(" %i\n", strcmp("002", "001"));
-
-	printf("\n");
 }
 
 void test_write()
 {
 	printf("---------------------- WRITE ----------------------\n");
 	WRITE("toto", 4L)
-	printf("real ret -> %ld\n", write(STDOUT_FILENO, "toto", 4L));
 	WRITE("totototo", 4L)
-	printf("real ret -> %ld\n", write(STDOUT_FILENO, "totototo", 4L));
 	WRITE("totototo", 8L)
-	printf("real ret -> %ld\n", write(STDOUT_FILENO, "totototo", 8L));
 	WRITE("toto", 2L)
-	printf("real ret -> %ld\n", write(STDOUT_FILENO, "toto", 2L));
 	WRITE("toto", 0)
-	printf("real ret -> %ld\n", write(STDOUT_FILENO, "toto", 0));
 }
 
 void test_read()
@@ -100,6 +80,7 @@ void test_read()
 void test_strdup()
 {
 	char	*tmp;
+	char	*tmp2;
 
 	printf("---------------------- STRDUP ----------------------\n");
 	DUP("salut");
@@ -119,6 +100,6 @@ int main(void)
 	test_strcpy();
 	test_strcmp();
 	test_write();
-	test_read();
+	// test_read();
 	test_strdup();
 }

@@ -11,7 +11,7 @@ while_cmp:
     inc rcx                     ; Increment index
     mov al, byte [rdi + rcx]    ; Load byte from s1 into AL
     mov bl, byte [rsi + rcx]    ; Load byte from s2 into BL
-    cmp bl, al                  ; Compare bytes from s1 and s2
+    cmp al, bl                  ; Compare bytes from s1 and s2
     jl is_less                  ; If s1 byte is less than s2 byte, jump to is_less
     jg is_greater               ; If s1 byte is greater than s2 byte, jump to is_greater
     cmp al, 0                   ; Check if the byte is the null terminator ('\0')

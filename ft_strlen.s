@@ -1,4 +1,4 @@
-; int		ft_strlen(char const *str);
+; size_t		ft_strlen(char const *str);
 ; rdi -> char const *str
 section .text
     global ft_strlen            ; Declare the ft_strlen function global to be accessible from other files
