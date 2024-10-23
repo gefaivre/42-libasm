@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
+#include <errno.h>
 
 #include "libasm.h"
 
@@ -12,7 +13,7 @@
 # define STRCPY(dest,src)		printf("[%s]\nlibasm -> [%s]\nstrcpy -> [%s]\n\n", src, ft_strcpy(dest, src), strcpy(dest, src))
 # define STRCMP(s1,s2)			printf("s1[%s] | s2[%s]\nlibasm -> %i\nstrcmp -> %i\n\n", s1, s2, ft_strcmp(s1, s2), strcmp(s1, s2))
 # define WRITE(s, x)			printf("\n[%s]\nlibasm -> %ld\nwrite -> %ld\n\n", s, ft_write(STDOUT_FILENO, s, x), write(STDOUT_FILENO, s, x));
-# define READ(b, x)				r = ft_read(STDIN_FILENO, buffer, x); printf("%s%ld\n", buffer, r); memset(buffer, 0, sizeof buffer);
+# define READ(b, x)				r = ft_read(STDIN_FILENO, buffer, x); printf("%s%ld\n", buffer, r); memset(buffer, 0, sizeof buffer); printf("------------------------\n");
 # define DUP(s)					tmp = ft_strdup(s), tmp2 = ft_strdup(s); printf("[%s]\nlibasm ->[%s]\nstrdup -> [%s]\n\n", s, tmp, tmp2); free(tmp); tmp = NULL;
 
 void test_strlen()
@@ -100,6 +101,6 @@ int main(void)
 	test_strcpy();
 	test_strcmp();
 	test_write();
-	// test_read();
+	test_read();
 	test_strdup();
 }
